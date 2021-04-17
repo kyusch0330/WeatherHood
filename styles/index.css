@@ -2,6 +2,7 @@
   /* colors  */
   --color-black:#101010;
   --color-lightGray:#C0C0C0;
+  --color-darkGray:#808080;
   --color-white:#F0F0F0;
   --color-transparentWhite:rgba(255,255,255,0.8);
   --color-transparentBlack:rgba(0,0,0,0.7);
@@ -14,21 +15,21 @@
   /*  font-sizes */
   --fontSize-normal : 1.8rem;
   --fontSize-large : 3.0rem;
-
+  
+  --fontSize-vw-details:1vw;
   --fontSize-vw-small:1.2vw;
-  --fontSize-vw-normal:2vw;
+  --fontSize-vw-normal:2.0vw;
   --fontSize-vw-large:3.5vw;
 
 }
 
 *{
   margin:0;
-  font-family: 'Jua', sans-serif;
-  /* font-family: 'Sunflower', sans-serif; */
 }
 
 body{
   width: 100%;
+  min-width: 300px;
   height: 100vh;
 
   background-image: url("../images/image_Default.png");
@@ -36,6 +37,10 @@ body{
   background-size: cover;
   /* 배경이미지의 중심이 보이게 */
   background-position-x: center;
+  
+  background-repeat: no-repeat;
+  /* 스크롤을 내려도 배경 고정 */
+  background-attachment: fixed;
 }
 
 .title{
@@ -45,6 +50,8 @@ body{
   position:sticky;
   left:10px;
   top:10px;
+  
+  font-family: 'Jua', sans-serif;
 
   margin-top:20px;
   margin-left:10px;
@@ -85,7 +92,6 @@ section{
 
   border-radius: 15px;
   background-color: var(--color-transparentBlack);
-  /* text-shadow: 0 -1px var(--color-black), 0 1px var(--color-black), -1px 0 var(--color-black), 1px 0 var(--color-black); */
 }
 
 
@@ -103,6 +109,8 @@ section{
   border-radius: 15px;
   background-color: var(--color-transparentWhite);
 
+  
+  font-family: 'Jua', sans-serif;
   font-size: var(--fontSize-vw-normal);
 }
 
@@ -129,7 +137,7 @@ section{
 }
 
 .weatherContainer .subInfo{
-  width: 30%;
+  width: 40%;
 
   display: flex;
   flex-flow:column nowrap;
@@ -138,22 +146,7 @@ section{
   margin-top: 5%
 }
 
-@media screen and (max-width:769px){
-  section{
-    width: 90%;
-  }
-}
-@media screen and (max-width:426px){
-  section{
-    width: 100%;
-  }
-  .weatherInfo{
-    width: 60%;
-  }
-  .weatherContainer .subInfo{
-    width: 50%;
-  }
-}
+
 
 .subInfo div{
   width: 100%;
@@ -185,35 +178,219 @@ section{
 
 .weatherDetails{
   width: 80%;
-  padding:3%;
+  padding:4%;
 
   display: flex;
   flex-flow: column;
   justify-content: space-between;
   
   border-radius: 15px;
-
+  
   background-color: var(--color-transparentWhite);
   margin-top: 5%;
+
+  font-family: 'Jua', sans-serif;
+  font-size:var(--fontSize-vw-details);
 }
+
+
 
 .weatherDetails .weatherDetailsHeader{
   align-self: flex-start;
+  color:var(--color-darkGray);
+  margin-bottom:2%;
 }
 
 .weatherDetails .weatherDetailsContent{
+  width: 100%;
   display: flex;
-
-  margin-top:5%;
+  align-items: flex-start;
+  
 }
 
 
-.tempDetails i{
-  font-size: 10vw;
+.weatherDetailsContent .tempDetailsContainer{
+  flex-basis: 40%;
+  padding-right: 3%;
+  width: 100%;
+
+  display:flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.tempDetailsContainer .tempDetailsHeader{
+  margin-bottom: 5%;
+}
+
+.tempDetailsContainer .tempDetails{
+  width: 100%;
+  display:flex;
+  align-items: center;
+}
+
+.tempDetails .tempManImg{
+  flex-basis: 25%;
+  margin-right: 8%;
+}
+.tempManImg i{
+  font-size: 9vw;
+}
+
+.tempDetails .tempDetailsInfo{
+  flex-basis: 75%;
+  height: 100%;
+
+  margin-right: 5%;
+
+  display:flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.tempDetailsInfo li{
+  margin-top: 10%;
 }
 
 
-.weatherGraphics{
-  background-color: turquoise;
+.weatherDetailsContent .windDetailsContainer{
+  flex-basis: 25%;
+  width: 100%;
+  border-left: 1px solid var(--color-lightGray);
+  border-right: 1px solid var(--color-lightGray);
+  padding: 0 5%;
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
+.windDetailsContainer .windDetailsHeader{
+  margin-bottom: 5%;
+}
+
+.windDetailsContainer .windDetails{
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.windDetails .canvasContainer{
+  width: 9.5vw;
+  height: 10vw;
+
+  background-size: contain;
+}
+
+#windDirectionCanvas{
+  width:100%;
+  height:100%;
+}
+
+
+.weatherDetailsContent .othersContainer{
+  flex-basis: 25%;
+  width: 100%;
+  padding-left: 3%;  
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.othersContainer .othersHeader{
+  margin-bottom: 15%;
+}
+
+.othersContainer .others{
+  display:flex;
+  flex-flow:column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.others li{
+  margin-top: 5%;
+}
+
+
+
+@media screen and (max-width:820px){
+  section{
+    width: 85%;
+    padding: 5% 0;
+  }
+  .title{
+    font-size:var(--fontSize-vw-large);
+  }
+  .weatherDetails{
+    width: 85%;
+  }
+  .weatherDetailsContent .tempDetailsContainer{
+    padding: 0;
+  }
+  .weatherDetailsContent .windDetailsContainer{
+    padding: 0 5% 5% 5%;
+  }
+}
+
+@media screen and (max-width:600px){
+  section{
+    width: 100%;
+    padding: 5% 0;
+  }
+  .weatherInfo{
+    width: 60%;
+  }
+  .weatherContainer .subInfo{
+    width: 50%;
+  }
+
+  .weatherDetails{
+    width: 50%;
+  }
+  .weatherDetailsHeader{
+    width: 100%;
+    text-align: center;
+  }
+  .tempDetails{
+    flex-flow: column;
+  }
+  .tempDetails .tempManImg{
+    margin:0;
+  }
+  .tempDetails .tempDetailsInfo{
+    margin: 3% 0;
+  }
+  .windDetails{
+    width: 100%;
+  }
+  .windDetails .canvasContainer{
+    width: 20.5vw;
+    height: 21vw;
+  }
+  .weatherDetailsContent{
+    flex-flow:column;
+    align-items: center;
+  }
+  .weatherDetailsContent .tempDetailsContainer{
+    padding: 10% 0;
+  }
+  .weatherDetailsContent .windDetailsContainer{
+    border:none;
+    border-top: 1px solid var(--color-lightGray);
+    border-bottom: 1px solid var(--color-lightGray);
+    padding: 10% 0;
+  }
+  .weatherDetailsContent .othersContainer{
+    padding: 10% 0;
+  }
+  .tempDetailsContainer .tempDetailsHeader,
+  .windDetailsContainer .windDetailsHeader,
+  .othersContainer .othersHeader{
+    margin-bottom: 5%;
+  }
+}

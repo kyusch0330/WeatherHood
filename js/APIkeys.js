@@ -1,2 +1,2 @@
-//secret API Key 
-export const openweathermapKey= null;
+//secret API Key
+export const openweathermapKey = null;

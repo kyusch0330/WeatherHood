@@ -19,11 +19,6 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- <div class="backgroundImgSize">
-    <div class="backgorundImgCenter">
-      <img class="backgroundImg" src="./images/image_Default.png" alt="">
-    </div>
-  </div> -->
   <div class="title">WeatherHood</div>
   <section>
     <div class="timeInfo">
@@ -42,11 +37,28 @@
     <article class="weatherDetails">
       <div class="weatherDetailsHeader">날씨 데이터가 없어요.</div>
       <div class="weatherDetailsContent">
-        <div class="tempDetails"> </div>
-        <div class="windDetails"> </div>
+        <div class="tempDetailsContainer">
+          <div class="tempDetailsHeader"></div>
+          <div class="tempDetails">
+            <div class="tempManImg"></div>
+            <div class="tempDetailsInfo"></div>
+          </div>
+        </div>
+        <div class="windDetailsContainer">
+          <div class="windDetailsHeader"></div>
+          <div class="windDetails"> 
+            <div class="canvasContainer">
+              <canvas id="windDirectionCanvas"></canvas>
+            </div>
+            <div class="windDetailsInfo"></div>
+          </div>
+        </div>
+        <div class="othersContainer">
+          <div class="othersHeader"></div>
+          <div class="others"></div>
+        </div>
       </div>
     </article>
-    <article class="weatherGraphics"></article>
   </section>
 </body>
 </html>
