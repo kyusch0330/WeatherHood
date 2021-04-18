@@ -4,6 +4,7 @@ import {openweathermapKey as weatherKey} from "./APIkeys.js";
 
 class WeatherInfo{
   constructor(){
+    this.timezone = null;
     this.city = null;
     this.main = null;
     this.weather = null;
@@ -17,6 +18,10 @@ const weatherInfo = new WeatherInfo();
 
 function setWeatherObj(data){
   console.log(data);
+  weatherInfo.timezone = {
+    h: data.timezone/3600,
+    m: data.timezone%3600
+  };
   weatherInfo.city = data.name;
   weatherInfo.main = {
     feels_like: data.main.feels_like,
@@ -46,9 +51,9 @@ function setWeatherObj(data){
 
 //fetch Weather from API server
 function fetchWeather(position){
-  const lon = position.coords.longitude;
+  const lat = 35.17;//position.coords.latitude;
               //Math.random()*100;
-  const lat = position.coords.latitude;
+  const lon = 129.07;//position.coords.longitude;
               //Math.random()*100;
   const key = weatherKey; //openweathermap's API key
   console.log(key);
@@ -63,15 +68,33 @@ function getPosFail(){
 
 const body = document.body;
 
+
+// time
+const days = [31,28,31,30,31,30,31,31,30,31,30,31];
 const timeBox = document.querySelector(".timeInfo");
 function showTime(){
   const date = new Date();
+  const timezone = weatherInfo.timezone;
+  let month = date.getMonth()+1;
+  let day = date.getDate();
+  const utcH = date.getUTCHours();
+  const utcM = date.getUTCMinutes();
+  let hours = utcH + timezone.h;
+  let minutes = utcM + timezone.m;
+  if(hours>23){
+    hours = hours%24;
+    day++;
+    if(day>days[month]){
+      day = 1;
+      month++;
+      if(month>12) month = 1;
+    }
+  }
   timeBox.firstChild.nodeValue = 
-    `${date.getMonth()+1}/${date.getDate()}
-     ${date.getHours()}:${date.getMinutes()<10 ? '0'+date.getMinutes():date.getMinutes()}`;
+    `${month}/${day}
+     ${hours}:${minutes<10 ? '0'+minutes:minutes}`;
 }
-showTime();
-setInterval(showTime,1000);
+
 
 const weatherInfoBox 
   = document.querySelector(".weatherInfo");
@@ -82,11 +105,10 @@ const mainInfoBox
 const subInfoBox
   = document.querySelector(".subInfo");
 
-const weatherDetailsBox
-  = document.querySelector(".weatherDetails");
-
 function showWeather(){
   setBackground();
+  showTime();
+  setInterval(showTime,1000);
   showWeatherInfo();
   showWeatherDetails();
   showWeatherGraphics();
@@ -272,10 +294,6 @@ function createOthersItem(othersInfo, type){
     info.innerHTML = `${i.slice(0,1)}시간 강${type}량 : ${othersInfo[i].toFixed(2)} mm`;
     others.appendChild(info);
   }
-}
-
-function showWeatherGraphics(){
-  //풍향계 그래픽 구현
 }
 
 

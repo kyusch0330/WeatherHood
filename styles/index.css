@@ -211,7 +211,6 @@ section{
 
 .weatherDetailsContent .tempDetailsContainer{
   flex-basis: 40%;
-  padding-right: 3%;
   width: 100%;
 
   display:flex;
