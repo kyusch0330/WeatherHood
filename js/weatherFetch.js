@@ -1,9 +1,20 @@
 "use strict";
+import {openweathermapAPIKey as weatherKey} from "./APIkeys.js";
+import {mapAPIKey as mapKey} from "./APIkeys.js";
 
-import {openweathermapKey as weatherKey} from "./APIkeys.js";
+const mapToggleBtn = document.querySelector(".mapToggleBtn");
+console.log(mapToggleBtn);
+const mapContainer = document.querySelector(".mapContainer");
+
+mapToggleBtn.addEventListener("click",() => {
+  mapContainer.classList.toggle("show");
+  //Notify that the map size is changed
+  map.relayout();
+});
 
 class WeatherInfo{
   constructor(){
+    this.local = null;
     this.timezone = null;
     this.city = null;
     this.main = null;
@@ -18,6 +29,11 @@ const weatherInfo = new WeatherInfo();
 
 function setWeatherObj(data){
   console.log(data);
+  weatherInfo.local = {
+    lat: data.coord.lat,
+    lon: data.coord.lon,
+    country: data.sys.country
+  }
   weatherInfo.timezone = {
     h: data.timezone/3600,
     m: data.timezone%3600
@@ -51,12 +67,12 @@ function setWeatherObj(data){
 
 //fetch Weather from API server
 function fetchWeather(position){
-  const lat = 35.17;//position.coords.latitude;
+  const lat = position.coords.latitude;
               //Math.random()*100;
-  const lon = 129.07;//position.coords.longitude;
+  const lon = position.coords.longitude;
               //Math.random()*100;
   const key = weatherKey; //openweathermap's API key
-  console.log(key);
+
   fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric&lang=kr`)
   .then(response => response.json())
   .then(setWeatherObj);
@@ -73,6 +89,7 @@ const body = document.body;
 const days = [31,28,31,30,31,30,31,31,30,31,30,31];
 const timeBox = document.querySelector(".timeInfo");
 function showTime(){
+  console.log("time showed");
   const date = new Date();
   const timezone = weatherInfo.timezone;
   let month = date.getMonth()+1;
@@ -105,13 +122,16 @@ const mainInfoBox
 const subInfoBox
   = document.querySelector(".subInfo");
 
+let stopTime = null;
+
 function showWeather(){
   setBackground();
   showTime();
-  setInterval(showTime,1000);
+  clearInterval(stopTime);
+  stopTime = setInterval(showTime,1000);
   showWeatherInfo();
   showWeatherDetails();
-  showWeatherGraphics();
+  createMap(weatherInfo.local.lat,weatherInfo.local.lon);
 }
 
 
@@ -135,6 +155,7 @@ function showWeatherInfo(){
   mainInfoBox.childNodes[3].firstChild.nodeValue = `${weatherDescription} `;
   
   //create subInfo's items
+  clearChilds(subInfoBox);
   createSubInfoItem("fas fa-thermometer-three-quarters", weatherInfo.main.temp, "℃");
   createSubInfoItem("fas fa-wind", weatherInfo.wind.speed, "m/s");
   createSubInfoItem("fas fa-tint", weatherInfo.main.humidity, "%");
@@ -177,6 +198,7 @@ function showWeatherDetails(){
   //tempDetails
   tempDetailsHeader.innerHTML = "기온";
   //create tempMan img
+  clearChilds(tempManImg);
   const humanIcon = document.createElement("i");
   const feelTemp = weatherInfo.main.feels_like;
   humanIcon.className = "fas fa-male";
@@ -190,6 +212,7 @@ function showWeatherDetails(){
   tempManImg.appendChild(humanIcon);
 
   //create tempDetailsInfo items
+  clearChilds(tempDetailsInfo);
   createTempDetailsInfoItem("체감",weatherInfo.main.feels_like);
   createTempDetailsInfoItem("최고",weatherInfo.main.temp_max);
   createTempDetailsInfoItem("최저",weatherInfo.main.temp_min);
@@ -197,6 +220,7 @@ function showWeatherDetails(){
   //windDetails
   windDetailsHeader.innerHTML = "바람";
   //create windDetailsInfo items
+  clearChilds(windDetailsInfo);
   const windDirect = getWindDirection(weatherInfo.wind.deg);
   const windDirectInfo = document.createElement("span");
   windDirectInfo.innerHTML = `초속 ${weatherInfo.wind.speed}m ${windDirect}풍`
@@ -208,6 +232,7 @@ function showWeatherDetails(){
   //others
   othersHeader.innerHTML = "기타상세";
   //create others items
+  clearChilds(others);
   if(weatherInfo.weather.main === "Rain"){
       createOthersItem(weatherInfo.others, "우")      
   }
@@ -281,8 +306,11 @@ function drawWindDirection(deg,speed){
   setArrowDirection(deg,speed);  
 }
 
+let stopArrow = null;
+
 function setArrowDirection(deg,speed){
-  setInterval(()=>{
+  clearInterval(stopArrow);
+  stopArrow = setInterval(()=>{
     const ran=deg+Math.random()*16-8;
     canvas.style.transform = `rotate(${ran}deg)`;
   },1000-100*speed);
@@ -296,7 +324,43 @@ function createOthersItem(othersInfo, type){
   }
 }
 
+const mapBox = document.getElementById("map");
+const mapBtn = document.querySelector(".mapBtn");
+let map=null;
 
+function createMap(lat, lon){
+  clearChilds(mapBox);
+  const options = {
+    center: new kakao.maps.LatLng(lat, lon),
+    level:9
+  }
+  map = new kakao.maps.Map(mapBox, options);
+  
+  var zoomControl = new kakao.maps.ZoomControl();
+  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+}
+mapBtn.addEventListener("click",()=>{
+  const bound= map.getBounds();
+  console.log(bound);
+  const lat= (bound.qa+bound.pa)/2 ,lon= (bound.ha+bound.oa)/2 ,key=weatherKey;
+  console.log("clicked! " + bound);
+  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric&lang=kr`)
+  .then(response => response.json())
+  .then(setWeatherObj);
+
+  
+    var mapContainer = document.getElementById('map');
+    mapContainer.style.width = '350px';
+    mapContainer.style.height = '350px'; 
+
+});
+
+function clearChilds(obj){
+  while(obj.hasChildNodes()){
+    obj.removeChild(obj.firstChild);
+  }
+}
 
 function init(){
   window.navigator.geolocation.getCurrentPosition(fetchWeather,getPosFail);

@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="></script>
+    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=Key를 입력"></script> -->
+    <script type ="module" src="./js/weatherFetch.js"></script>
+    
+    <link rel="stylesheet" href="./styles/index.css">
+    
+    
+    <script src="https://kit.fontawesome.com/10528475d6.js" crossorigin="anonymous"></script>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    
+    <title>Document</title>
+  </head>
+  <body>
 
-  <script type ="module" src="./js/weatherFetch..js"></script>
-  <link rel="stylesheet" href="./styles/index.css">
-
-  <script src="https://kit.fontawesome.com/10528475d6.js" crossorigin="anonymous"></script>
-
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-
-  <title>Document</title>
-</head>
-<body>
-  <div class="title">WeatherHood</div>
+    <div class="title">WeatherHood</div>
+    <button class="mapToggleBtn"><i class="fas fa-map-marked-alt"></i></button>
+    <div class="mapContainer">
+      <div id="map" ></div>
+      <button class="mapBtn">지역 선택</button>
+    </div>
   <section>
-    <div class="timeInfo">
+    <div class="timeInfo"> 
     </div>
     <article class="weatherInfo">
       <p class="location">위치 정보 없음</p>
-      <div class="weatherContainer">
+      <div class="weatherContainer" width="${100}">
         <div class="mainInfo">
           <img src="" alt="" class="weatherImage">
           <p class="weatherType"> </p>
@@ -60,5 +69,6 @@
       </div>
     </article>
   </section>
+  <script defer type="text/javascript" src="./js/mapLoad.js"></script>
 </body>
 </html>
