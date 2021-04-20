@@ -43,18 +43,107 @@ body{
   background-attachment: fixed;
 }
 
+.header{
+  position:sticky;
+  top:0;
+
+  width: 100%;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top:1rem;
+  padding:0.5rem 0 0.3rem 0;
+  background-color: transparent;
+}
+.header.cover{
+  background-color: var(--color-transparentBlack);
+}
+
 .title{
   color:var(--color-white);
-  font-size:var(--fontSize-large);
+  font-size:3rem;
   
-  position:sticky;
-  left:10px;
-  top:10px;
   
   font-family: 'Jua', sans-serif;
+  
+  margin:0 1rem;
+}
 
-  margin-top:20px;
-  margin-left:10px;
+.menu{
+  display:flex;
+  align-items: center;
+  margin: 0 2rem;
+}
+
+.globalToggleBtn{
+  all:unset;
+  cursor:pointer;
+  margin-right: 1.5rem;
+}
+.globalToggleBtn i{
+  font-size:2rem;
+  color:var(--color-white);
+}
+
+.globalMenuContainer{
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+
+  position: fixed;
+  right:0px;
+  top:100px;
+  width: 15vw;
+  height: 50vh;
+  
+  background-color: var(--color-transparentBlack);
+  padding-right: 0.8rem;
+  display:none;
+}
+.globalMenuContainer.show{
+  display: flex;
+}
+.globalMenu{
+  width: 100%;
+  overflow-y: scroll;
+
+  display:flex;
+  flex-flow: column;
+  align-items: center;
+}
+.globalMenu .cityBtn{
+  all:unset;
+  width:100%;
+  color:var(--color-white);
+  text-align: center;
+  font-family: 'Jua', sans-serif;
+
+  font-size: 0.8rem;
+  padding: 0.5rem 0;
+}
+.globalMenu .cityBtn:hover{
+  background-color: var(--color-darkGray);
+  cursor: pointer;
+}
+
+.closeGlobalMenuBtn{
+  all:unset;
+  cursor: pointer;
+  align-self: flex-start;
+  text-align: center;
+  padding: 0.5rem 0.8rem;
+  width:1rem;
+  color:var(--color-white);
+}
+
+
+.mapToggleBtn{
+  all:unset;
+  cursor:pointer;
+}
+.mapToggleBtn i{
+  font-size:2rem;
+  color:var(--color-white);
 }
 
 .mapContainer{
@@ -62,7 +151,7 @@ body{
   height: 30vw;
   position:fixed;
   right:20px;
-  top:60px;
+  top:75px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -72,21 +161,6 @@ body{
 }
 .mapContainer.show{
   display: flex;
-}
-
-.mapToggleBtn{
-  position:fixed;
-  right:20px;
-  top:15px;
-  all:unset;
-  cursor:pointer;
-}
-.mapToggleBtn i{
-  position:fixed;
-  right:25px;
-  top:15px;
-  font-size:2rem;
-  color:var(--color-white);
 }
 #map{
   width: 100%;
@@ -374,7 +448,11 @@ section{
     padding: 5% 0;
   }
   .title{
-    font-size:var(--fontSize-vw-large);
+    font-size:2rem;
+  }
+  .mapContainer{
+    width: 40vw;
+    height: 40vw;
   }
   .weatherDetails{
     width: 85%;
@@ -392,8 +470,23 @@ section{
     width: 100%;
     padding: 5% 0;
   }
+  .title{
+    font-size:1.2rem;
+  }
+  .menu{
+    margin: 0 1rem;
+  }
+  .globalToggleBtn{
+    margin-right: 0.5rem;
+  }
+  .globalToggleBtn i{
+    font-size: 1rem;
+  }
+  .globalMenu{
+    width:20vw;
+  }
   .mapToggleBtn i{
-    font-size:1rem;
+    font-size: 1rem;
   }
   .mapContainer{
     width: 80vw;

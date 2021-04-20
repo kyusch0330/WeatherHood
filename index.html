@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="></script>
-    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=Key를 입력"></script> -->
-    <script type ="module" src="./js/weatherFetch.js"></script>
     
     <link rel="stylesheet" href="./styles/index.css">
     
-    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="></script>
+    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=Key를 입력"></script> -->
+    <script type ="module" src="./js/weatherFetch.js"></script>
     <script src="https://kit.fontawesome.com/10528475d6.js" crossorigin="anonymous"></script>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -22,9 +21,18 @@
     <title>Document</title>
   </head>
   <body>
-
-    <div class="title">WeatherHood</div>
-    <button class="mapToggleBtn"><i class="fas fa-map-marked-alt"></i></button>
+    <div class="header">
+      <div class="title">WeatherHood</div>
+      <div class="menu">
+        <button class="globalToggleBtn"><i class="fas fa-globe"></i></button>
+        <button class="mapToggleBtn"><i class="fas fa-map-marked-alt"></i></button>
+      </div>
+    </div>
+    <div class="globalMenuContainer">
+      <button class="closeGlobalMenuBtn">x</button>
+      <div class="globalMenu">
+      </div>
+    </div>
     <div class="mapContainer">
       <div id="map" ></div>
       <button class="mapBtn">지역 선택</button>
@@ -69,6 +77,5 @@
       </div>
     </article>
   </section>
-  <script defer type="text/javascript" src="./js/mapLoad.js"></script>
 </body>
 </html>

@@ -1,9 +1,49 @@
 "use strict";
 import {openweathermapAPIKey as weatherKey} from "./APIkeys.js";
-import {mapAPIKey as mapKey} from "./APIkeys.js";
 
+//header action by scroll
+const header=document.querySelector(".header");
+window.addEventListener("scroll",()=>{
+  if(document.documentElement.scrollTop>=60){
+    header.classList.add("cover");
+  }
+  else{
+    header.classList.remove("cover");
+  }
+});
+
+//golbal toggle
+const globalToggleBtn = document.querySelector(".globalToggleBtn");
+const globalMenuContainer = document.querySelector(".globalMenuContainer");
+const globalMenu = document.querySelector(".globalMenu");
+globalToggleBtn.addEventListener("click",() => {
+  globalMenuContainer.classList.toggle("show");
+});
+
+const cities = ["서울", "뉴욕","알래스카","LA","런던","파리","케이프 타운","베이징","도쿄","하와이","시드니","오클랜드"];
+const lats = [37.56, 40.7, 64.2, 34.06, 51.5, 48.854, -33.92, 39.9, 35.69, 21.309, -33.86, -36.85];
+const lons = [126.97, -74.0, -149.5, -118.25, -0.08, 2.34, 18.42, 116.4, 139.69, -157.858, 151.2, 174.76];
+
+const closeGlobalMenuBtn = document.querySelector(".closeGlobalMenuBtn");
+closeGlobalMenuBtn.addEventListener("click", ()=>{
+  globalMenuContainer.classList.remove("show");
+});
+
+for(let i=0; i<cities.length; i++){
+  const cityBtn = document.createElement("button");
+  cityBtn.innerHTML = cities[i];
+  cityBtn.className = "cityBtn";
+  cityBtn.addEventListener("click", ()=>{
+    const key = weatherKey;
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lats[i]}&lon=${lons[i]}&appid=${key}&units=metric&lang=kr`)
+    .then(response => response.json())
+    .then(setWeatherObj);
+  });
+  globalMenu.appendChild(cityBtn);
+}
+
+//map toggle
 const mapToggleBtn = document.querySelector(".mapToggleBtn");
-console.log(mapToggleBtn);
 const mapContainer = document.querySelector(".mapContainer");
 
 mapToggleBtn.addEventListener("click",() => {
@@ -12,6 +52,8 @@ mapToggleBtn.addEventListener("click",() => {
   map.relayout();
 });
 
+
+//weather class
 class WeatherInfo{
   constructor(){
     this.local = null;
@@ -27,6 +69,7 @@ class WeatherInfo{
 
 const weatherInfo = new WeatherInfo();
 
+//set WeatherInfo
 function setWeatherObj(data){
   console.log(data);
   weatherInfo.local = {
@@ -89,7 +132,6 @@ const body = document.body;
 const days = [31,28,31,30,31,30,31,31,30,31,30,31];
 const timeBox = document.querySelector(".timeInfo");
 function showTime(){
-  console.log("time showed");
   const date = new Date();
   const timezone = weatherInfo.timezone;
   let month = date.getMonth()+1;
@@ -124,6 +166,7 @@ const subInfoBox
 
 let stopTime = null;
 
+//create main
 function showWeather(){
   setBackground();
   showTime();
@@ -134,12 +177,12 @@ function showWeather(){
   createMap(weatherInfo.local.lat,weatherInfo.local.lon);
 }
 
-
+//set background image
 function setBackground(){
   body.style.backgroundImage = `url(../images/image_${weatherInfo.weather.main}.png)`;
 }
 
-
+//show main weather info
 function showWeatherInfo(){
   const city = weatherInfo.city===""?"해당 지역":weatherInfo.city; 
   weatherInfoBox.childNodes[1].firstChild.nodeValue
@@ -190,6 +233,7 @@ const othersHeader
 const others
   = document.querySelector(".others");
 
+  //show weather details
 function showWeatherDetails(){
   //기온 파트 : 체감, 최저, 최고
   //풍속 파트
@@ -255,7 +299,6 @@ function showWeatherDetails(){
     gust.innerHTML = `돌풍 세기 : ${weatherInfo.wind.gust} m/s`;
     others.appendChild(gust);
   }
-
 
 }
 
@@ -324,6 +367,8 @@ function createOthersItem(othersInfo, type){
   }
 }
 
+
+//create map using API
 const mapBox = document.getElementById("map");
 const mapBtn = document.querySelector(".mapBtn");
 let map=null;
@@ -348,14 +393,9 @@ mapBtn.addEventListener("click",()=>{
   fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric&lang=kr`)
   .then(response => response.json())
   .then(setWeatherObj);
-
-  
-    var mapContainer = document.getElementById('map');
-    mapContainer.style.width = '350px';
-    mapContainer.style.height = '350px'; 
-
 });
 
+//clear all one's childs function
 function clearChilds(obj){
   while(obj.hasChildNodes()){
     obj.removeChild(obj.firstChild);
