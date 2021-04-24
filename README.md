@@ -5,7 +5,7 @@ PC
   
 ![main_0](https://user-images.githubusercontent.com/57261292/115969999-c08d2200-a57a-11eb-96b5-66ba14d91e97.PNG)
 ![main_2](https://user-images.githubusercontent.com/57261292/115970001-c1be4f00-a57a-11eb-8219-dba8727dde77.PNG)
-![global_0](https://user-images.githubusercontent.com/57261292/115970010-ca168a00-a57a-11eb-8cf8-1b8c33cb3ac0.PNG)
+![global_1](https://user-images.githubusercontent.com/57261292/115970478-83765f00-a57d-11eb-9d36-41d17d74f85c.PNG)
 ![map_1](https://user-images.githubusercontent.com/57261292/115970015-d1d62e80-a57a-11eb-8375-9327ffcd56b2.PNG)
 
   
