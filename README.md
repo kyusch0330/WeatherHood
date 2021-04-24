@@ -20,7 +20,7 @@ Tablet
 Mobile  
   
 ![mobile_0](https://user-images.githubusercontent.com/57261292/115970033-f205ed80-a57a-11eb-8504-802ccf6c9558.PNG)
-![mobile_1](https://user-images.githubusercontent.com/57261292/115970036-f6caa180-a57a-11eb-8723-f73b13823022.PNG)
+![mobile_1](https://user-images.githubusercontent.com/57261292/115970523-d3edbc80-a57d-11eb-859f-83b2e0b8b274.PNG)
 ![mobile_global_0](https://user-images.githubusercontent.com/57261292/115970038-f8946500-a57a-11eb-9fa6-1d6bb58ffc84.PNG)
 ![mobile_map_0](https://user-images.githubusercontent.com/57261292/115970043-fc27ec00-a57a-11eb-9183-90519d7b3425.PNG)
 
