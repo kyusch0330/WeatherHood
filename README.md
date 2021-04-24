@@ -1,6 +1,6 @@
 # WeatherHood
 Basic Weather API fetch project
-
+  
 PC  
   
 ![main_0](https://user-images.githubusercontent.com/57261292/115969999-c08d2200-a57a-11eb-96b5-66ba14d91e97.PNG)
@@ -8,7 +8,7 @@ PC
 ![global_0](https://user-images.githubusercontent.com/57261292/115970010-ca168a00-a57a-11eb-8cf8-1b8c33cb3ac0.PNG)
 ![map_1](https://user-images.githubusercontent.com/57261292/115970015-d1d62e80-a57a-11eb-8375-9327ffcd56b2.PNG)
 
-
+  
 Tablet  
   
 ![tablet_0](https://user-images.githubusercontent.com/57261292/115970016-d6024c00-a57a-11eb-8e7d-09cda8fd4d14.PNG)
@@ -16,7 +16,7 @@ Tablet
 ![tablet_global_0](https://user-images.githubusercontent.com/57261292/115970019-d995d300-a57a-11eb-862f-861f4d72afab.PNG)
 ![tablet_map_0](https://user-images.githubusercontent.com/57261292/115970020-dac70000-a57a-11eb-870c-d0c4cc2a0645.PNG)
 
-
+  
 Mobile  
   
 ![mobile_0](https://user-images.githubusercontent.com/57261292/115970033-f205ed80-a57a-11eb-8504-802ccf6c9558.PNG)
