@@ -106,6 +106,7 @@ body{
 .globalMenu{
   width: 100%;
   overflow-y: scroll;
+  scroll-padding-right: 1rem;
 
   display:flex;
   flex-flow: column;
@@ -482,7 +483,7 @@ section{
   .globalToggleBtn i{
     font-size: 1rem;
   }
-  .globalMenu{
+  .globalMenuContainer{
     width:20vw;
   }
   .mapToggleBtn i{
